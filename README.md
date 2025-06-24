@@ -4,7 +4,7 @@ This repository contains the oracle aggregator contract along with a simple cust
 
 ## Building the contracts
 
-The repository ships with a `Makefile` that compiles both contracts and optimizes the resulting WASM files.
+The repository ships with a `Makefile` that compiles the aggregator in the root crate and the custom oracle found under `custom-oracle/`, producing optimized WASM files for each contract.
 
 ```bash
 make build

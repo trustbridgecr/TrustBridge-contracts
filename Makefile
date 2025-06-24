@@ -9,11 +9,13 @@ build:
 	mkdir -p target/wasm32-unknown-unknown/optimized
 
 	cargo build --target=wasm32-unknown-unknown --release
+	cargo build --manifest-path custom-oracle/Cargo.toml \
+		--target=wasm32-unknown-unknown --release --target-dir target/custom-oracle
 	stellar contract optimize \
 		--wasm target/wasm32-unknown-unknown/release/oracle_aggregator.wasm \
 		--wasm-out target/wasm32-unknown-unknown/optimized/oracle_aggregator.wasm
 	stellar contract optimize \
-		--wasm target/wasm32-unknown-unknown/release/custom_oracle.wasm \
+		--wasm target/custom-oracle/wasm32-unknown-unknown/release/custom_oracle.wasm \
 		--wasm-out target/wasm32-unknown-unknown/optimized/custom_oracle.wasm
 
 	cd target/wasm32-unknown-unknown/optimized/ && \
