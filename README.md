@@ -15,13 +15,14 @@ The optimized binaries will be located in `target/wasm32-unknown-unknown/optimiz
 ## Deploying the contracts
 
 1. **Deploy the custom oracle**
+
    1. Upload `custom_oracle.wasm` to the network.
-   2. Invoke `__constructor` supplying the administrator address, a list of assets, the decimals used for prices and the resolution in seconds.
+   2. Invoke `init` supplying the administrator address, a list of assets, the decimals used for prices and the resolution in seconds.
    3. Use `set_price` to publish prices for all configured assets at a specific timestamp.
 
 2. **Deploy the oracle aggregator**
    1. Upload `oracle_aggregator.wasm`.
-   2. Call `__constructor` with an admin address, the base asset, the number of decimals and the maximum age (in seconds) for price history.
+   2. Call `init` with an admin address, the base asset, the number of decimals and the maximum age (in seconds) for price history.
    3. Register the custom oracle address using `add_oracle`.
    4. Register assets with `add_asset` or `add_base_asset` as needed.
 
