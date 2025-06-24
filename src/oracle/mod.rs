@@ -1,13 +1,20 @@
 use soroban_sdk::{contract, contractimpl, Address, Env, Vec};
 
 use crate::types::{Asset, PriceData};
-use crate::oracle::storage::{self};
+mod storage;
+use storage;
 #[contract]
 pub struct CustomOracle;
 
 #[contractimpl]
 impl CustomOracle {
-    pub fn __constructor(e: Env, admin: Address, assets: Vec<Asset>, decimals: u32, resolution: u32) {
+    pub fn __constructor(
+        e: Env,
+        admin: Address,
+        assets: Vec<Asset>,
+        decimals: u32,
+        resolution: u32,
+    ) {
         storage::set_admin(&e, &admin);
         storage::set_assets(&e, &assets);
         storage::set_decimals(&e, &decimals);
@@ -39,11 +46,11 @@ impl CustomOracle {
         storage::get_last_timestamp(&e)
     }
 
-    pub fn price(e: Env, asset: &Asset, timestamp: &u64) -> Option<PriceData> {
-        if let Some(p) = storage::get_price(&e, asset, timestamp) {
+    pub fn price(e: Env, asset: Asset, timestamp: u64) -> Option<PriceData> {
+        if let Some(p) = storage::get_price(&e, &asset, &timestamp) {
             Some(PriceData {
                 price: p,
-                timestamp: *timestamp,
+                timestamp,
             })
         } else {
             None
