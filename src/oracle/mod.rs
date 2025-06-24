@@ -2,7 +2,6 @@ use soroban_sdk::{contract, contractimpl, Address, Env, Vec};
 
 use crate::types::{Asset, PriceData};
 mod storage;
-use storage;
 #[contract]
 pub struct CustomOracle;
 
