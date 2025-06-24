@@ -21,7 +21,7 @@ impl OracleAggregator {
     //
     // ### Errors
     // * `InvalidMaxAge` - The max age is not between 360 (6m) and 3600 (60m)
-    pub fn __constructor(e: Env, admin: Address, base: Asset, decimals: u32, max_age: u64) {
+    pub fn init(e: Env, admin: Address, base: Asset, decimals: u32, max_age: u64) {
         storage::extend_instance(&e);
         storage::set_admin(&e, &admin);
         storage::set_base(&e, &base);
