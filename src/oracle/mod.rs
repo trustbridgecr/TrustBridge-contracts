@@ -7,7 +7,7 @@ pub struct CustomOracle;
 
 #[contractimpl]
 impl CustomOracle {
-    pub fn __constructor(
+    pub fn init(
         e: Env,
         admin: Address,
         assets: Vec<Asset>,
