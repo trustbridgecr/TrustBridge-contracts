@@ -4,12 +4,15 @@ test: build
 	cargo test --all --tests
 
 build:
-	mkdir -p target/wasm32-unknown-unknown/optimized
+        mkdir -p target/wasm32-unknown-unknown/optimized
 
-	cargo rustc --manifest-path=Cargo.toml --crate-type=cdylib --target=wasm32-unknown-unknown --release 
-	stellar contract optimize \
-		--wasm target/wasm32-unknown-unknown/release/oracle_aggregator.wasm \
-		--wasm-out target/wasm32-unknown-unknown/optimized/oracle_aggregator.wasm
+        cargo build --target=wasm32-unknown-unknown --release
+        stellar contract optimize \
+                --wasm target/wasm32-unknown-unknown/release/oracle_aggregator.wasm \
+                --wasm-out target/wasm32-unknown-unknown/optimized/oracle_aggregator.wasm
+        stellar contract optimize \
+                --wasm target/wasm32-unknown-unknown/release/custom_oracle.wasm \
+                --wasm-out target/wasm32-unknown-unknown/optimized/custom_oracle.wasm
 
 	cd target/wasm32-unknown-unknown/optimized/ && \
 		for i in *.wasm ; do \
