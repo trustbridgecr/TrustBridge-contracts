@@ -111,12 +111,4 @@ For additional help with deployment and scripting, please refer to the [`blend-u
 
 ---
 
-## 💡 Additional Notes
-
-- Follow the [Git Guidelines](https://github.com/TrustBridgeCR/Landing/blob/main/GIT_GUIDELINE.md) for branch naming, commit messages, and overall contribution standards.
-- Ensure your code adheres to the repository’s coding standards.
-- Respect the project maintainers' feedback and requested changes.
-
----
-
 Thank you for contributing to **TrustBridge**! 🚀✨
