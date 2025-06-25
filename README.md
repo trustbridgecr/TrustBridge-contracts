@@ -1,10 +1,10 @@
-# Blend Protocol
+# TrustBridge Protocol
 
-This repository contains the smart contacts for an implementation of the Blend Protocol. Blend is a universal liquidity protocol primitive that enables the permissionless creation of lending pools.
+This repository contains the smart contracts for an implementation of the TrustBridge Protocol. TrustBridge is a universal liquidity protocol primitive that enables the permissionless creation of lending pools.
 
 ## Documentation
 
-To learn more about the Blend Protocol, visit the docs:
+To learn more about the TrustBridge Protocol, visit the docs:
 
 - [Blend Docs](https://docs.blend.capital/)
 
@@ -43,9 +43,3 @@ For help with deployment to a network, please visit the [Blend Utils](https://gi
 Notes for contributors:
 
 - Under no circumstances should the "overflow-checks" flag be removed otherwise contract math will become unsafe
-
-## Community Links
-
-A set of links for various things in the community. Please submit a pull request if you would like a link included.
-
-- [Blend Discord](https://discord.com/invite/a6CDBQQcjW)
