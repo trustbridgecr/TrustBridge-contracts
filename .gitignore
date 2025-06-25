@@ -1,12 +1,11 @@
-target
-.soroban
-
-# environment variables
-.env
-.env.production
-
-# macOS-specific files
+/target
 .DS_Store
+**/.DS_Store
 
-test_snapshots
-js
+test_snapshots/
+
+# JS
+*/node_modules
+local.*
+
+/js

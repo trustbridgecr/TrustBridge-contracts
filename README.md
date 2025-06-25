@@ -1,29 +1,51 @@
-# TrustBridge Contracts
+# Blend Protocol
 
-This repository contains the oracle aggregator contract along with a simple custom oracle implementation.
+This repository contains the smart contacts for an implementation of the Blend Protocol. Blend is a universal liquidity protocol primitive that enables the permissionless creation of lending pools.
 
-## Building the contracts
+## Documentation
 
-Ensure the `soroban` CLI is installed. The repository ships with a `Makefile` that compiles the aggregator in the root crate and the custom oracle found under `custom-oracle/`, producing optimized WASM files for each contract.
+To learn more about the Blend Protocol, visit the docs:
 
-```bash
-make build
+- [Blend Docs](https://docs.blend.capital/)
+
+## Audits
+
+Conducted audits can be viewed in the `audits` folder.
+
+## Getting Started
+
+Build the contracts with:
+
+```
+make
 ```
 
-The optimized binaries will be located in `target/wasm32-unknown-unknown/optimized/`.
+Run all unit tests and the integration test suite with:
 
-## Deploying the contracts
+```
+make test
+```
 
-1. **Deploy the custom oracle**
+## Deployment
 
-   1. Upload `custom_oracle.wasm` to the network.
-   2. Invoke `init` supplying the administrator address, a list of assets, the decimals used for prices and the resolution in seconds.
-   3. Use `set_price` to publish prices for all configured assets at a specific timestamp.
+The `make` command creates an optimized and un-optimized set of WASM contracts. It's recommended to use the optimized version if deploying to a network.
 
-2. **Deploy the oracle aggregator**
-   1. Upload `oracle_aggregator.wasm`.
-   2. Call `init` with an admin address, the base asset, the number of decimals and the maximum age (in seconds) for price history.
-   3. Register the custom oracle address using `add_oracle`.
-   4. Register assets with `add_asset` or `add_base_asset` as needed.
+These can be found at the path:
 
-After deployment the aggregator can query the custom oracle using the `PriceFeed` interface.
+```
+target/wasm32-unknown-unknown/optimized
+```
+
+For help with deployment to a network, please visit the [Blend Utils](https://github.com/blend-capital/blend-utils) repo.
+
+## Contributing
+
+Notes for contributors:
+
+- Under no circumstances should the "overflow-checks" flag be removed otherwise contract math will become unsafe
+
+## Community Links
+
+A set of links for various things in the community. Please submit a pull request if you would like a link included.
+
+- [Blend Discord](https://discord.com/invite/a6CDBQQcjW)
