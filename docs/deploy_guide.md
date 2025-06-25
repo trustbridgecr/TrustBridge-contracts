@@ -35,7 +35,7 @@ Output:
 Installed WASM hash: b81e...
 ```
 
-### 1.1 Create contract (call `init`)
+### 1.1 Create contract (call `__constructor`)
 
 ```bash
 stellar contract deploy \
@@ -44,7 +44,7 @@ stellar contract deploy \
   --rpc-url https://soroban-testnet.stellar.org \
   --network-passphrase "Test SDF Network ; September 2015" \
   --source-account oracle-deployer \
-  -- \
+  -- __constructor \
     admin=GASVLW5YQFHEZJPNV2OQQ3P6CBD5Z5IW3XDAPEGSS6BMQZ35WZHCSKNB \
     assets='[{"Symbol":"USDC"},{"Symbol":"BLND"}]' \
     decimals=6 \
@@ -71,4 +71,16 @@ stellar contract invoke \
   --network-passphrase "Test SDF Network ; September 2015" \
   --source-account oracle-deployer \
   -- resolution
+```
+
+### 1.4 Publicar precios con `set_price`
+
+```bash
+stellar contract invoke \
+  --id CDLR6TLYLADGOZFDMWEWOY5NLKIDQ2Y3K62OXX47ZWQARLVRYLFS2CNW \
+  --network testnet \
+  --rpc-url https://soroban-testnet.stellar.org \
+  --network-passphrase "Test SDF Network ; September 2015" \
+  --source-account oracle-deployer \
+  -- set_price prices='[1000000,2000000]' timestamp=1728000000
 ```

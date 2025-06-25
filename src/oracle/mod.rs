@@ -7,7 +7,7 @@ pub struct CustomOracle;
 
 #[contractimpl]
 impl CustomOracle {
-    pub fn init(
+    pub fn __constructor(
         e: Env,
         admin: Address,
         assets: Vec<Asset>,
@@ -19,6 +19,16 @@ impl CustomOracle {
         storage::set_decimals(&e, &decimals);
         storage::set_resolution(&e, &resolution);
         storage::set_last_timestamp(&e, &0u64);
+    }
+
+    pub fn init(
+        e: Env,
+        admin: Address,
+        assets: Vec<Asset>,
+        decimals: u32,
+        resolution: u32,
+    ) {
+        Self::__constructor(e, admin, assets, decimals, resolution);
     }
 
     pub fn set_price(e: Env, prices: Vec<i128>, timestamp: u64) {
