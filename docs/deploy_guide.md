@@ -29,24 +29,13 @@ Output:
 
 ## 🚀 1. Deploy `custom_oracle`
 
-### 1.1 Install WASM
-
-```bash
-stellar contract install \
-  --wasm target/wasm32-unknown-unknown/optimized/custom_oracle.wasm \
-  --network testnet \
-  --rpc-url https://soroban-testnet.stellar.org \
-  --network-passphrase "Test SDF Network ; September 2015" \
-  --source-account oracle-deployer
-```
-
 Output:
 
 ```
 Installed WASM hash: b81e...
 ```
 
-### 1.2 Create contract (call `init`)
+### 1.1 Create contract (call `__constructor`)
 
 ```bash
 stellar contract deploy \
@@ -62,93 +51,36 @@ stellar contract deploy \
     resolution=60
 ```
 
-### 1.3 Publish prices
+### 1.2 Contract info
+
+```bash
+stellar contract info interface \
+  --id CDLR6TLYLADGOZFDMWEWOY5NLKIDQ2Y3K62OXX47ZWQARLVRYLFS2CNW \
+  --network testnet \
+  --rpc-url https://soroban-testnet.stellar.org \
+  --network-passphrase "Test SDF Network ; September 2015"
+```
+
+### 1.3 Consultar la resolución
 
 ```bash
 stellar contract invoke \
-  --id <CUSTOM_ORACLE_ID> \
-  --fn set_price \
-  --network testnet \
-  --rpc-url https://soroban-testnet.stellar.org \
-  --network-passphrase "Test SDF Network ; September 2015" \
-  --source-account GASVL... \
-  -- \
-    prices='[1000000, 250000]' \
-    timestamp=1720000000
-```
-
----
-
-## 🚀 2. Deploy `oracle_aggregator`
-
-### 2.1 Install WASM
-
-```bash
-stellar contract install \
-  --wasm target/wasm32-unknown-unknown/optimized/oracle_aggregator.wasm \
-  --network testnet \
-  --rpc-url https://soroban-testnet.stellar.org \
-  --network-passphrase "Test SDF Network ; September 2015" \
-  --source-account oracle-deployer
-```
-
-### 2.2 Create contract (call `init`)
-
-```bash
-stellar contract create \
-  --wasm-hash <AGGREGATOR_WASM_HASH> \
+  --id CDLR6TLYLADGOZFDMWEWOY5NLKIDQ2Y3K62OXX47ZWQARLVRYLFS2CNW \
   --network testnet \
   --rpc-url https://soroban-testnet.stellar.org \
   --network-passphrase "Test SDF Network ; September 2015" \
   --source-account oracle-deployer \
-  -- \
-    init \
-    admin=GASVLW5YQFHEZJPNV2OQQ3P6CBD5Z5IW3XDAPEGSS6BMQZ35WZHCSKNB \
-    base_asset='{{"Symbol":"USDC"}}' \
-    decimals=6 \
-    max_age=300
+  -- resolution
 ```
 
-### 2.3 Register oracle
+### 1.4 Publicar precios con `set_price`
 
 ```bash
 stellar contract invoke \
-  --id <AGGREGATOR_CONTRACT_ID> \
-  --fn add_oracle \
+  --id CDLR6TLYLADGOZFDMWEWOY5NLKIDQ2Y3K62OXX47ZWQARLVRYLFS2CNW \
   --network testnet \
   --rpc-url https://soroban-testnet.stellar.org \
   --network-passphrase "Test SDF Network ; September 2015" \
-  --source-account GASVL... \
-  -- \
-    oracle=<CUSTOM_ORACLE_ID>
-```
-
-### 2.4 Register asset
-
-```bash
-stellar contract invoke \
-  --id <AGGREGATOR_CONTRACT_ID> \
-  --fn add_asset \
-  --network testnet \
-  --rpc-url https://soroban-testnet.stellar.org \
-  --network-passphrase "Test SDF Network ; September 2015" \
-  --source-account GASVL... \
-  -- \
-    asset='{{"Symbol":"BLND"}}'
-```
-
----
-
-## 📈 Query price
-
-```bash
-stellar contract invoke \
-  --id <AGGREGATOR_CONTRACT_ID> \
-  --fn price \
-  --network testnet \
-  --rpc-url https://soroban-testnet.stellar.org \
-  --network-passphrase "Test SDF Network ; September 2015" \
-  -- \
-    asset='{{"Symbol":"BLND"}}' \
-    timestamp=1720000000
+  --source-account oracle-deployer \
+  -- set_price prices='[1000000,2000000]' timestamp=1728000000
 ```
