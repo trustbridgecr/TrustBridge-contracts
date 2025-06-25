@@ -55,7 +55,7 @@ stellar contract deploy \
 
 ```bash
 stellar contract info interface \
-  --id CDLR6TLYLADGOZFDMWEWOY5NLKIDQ2Y3K62OXX47ZWQARLVRYLFS2CNW \
+  --id CD4C4P7HSJKDJ5G6VCLIXWCQJNA257NRXBT44CKQCRRIDENTFJ5UMHYO \
   --network testnet \
   --rpc-url https://soroban-testnet.stellar.org \
   --network-passphrase "Test SDF Network ; September 2015"
