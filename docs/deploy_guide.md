@@ -1,86 +1,29 @@
-# TrustBridge Contracts — Deploy & Usage Guide
+# TrustBridge Contracts
 
-This guide explains how to build, deploy, and use the `custom_oracle` and `oracle_aggregator` contracts on the Soroban testnet using the `stellar` CLI.
+This repository contains the oracle aggregator contract along with a simple custom oracle implementation.
 
----
+## Building the contracts
 
-## 🛠️ Prerequisites
-
-- Rust toolchain (`rustup`)
-- Soroban-compatible `stellar` CLI (v20.0.0-rc3 or higher):
-  ```bash
-  cargo install --locked stellar-cli --features opt
-  ```
-
----
-
-## 🏗️ Building the contracts
+Ensure the `soroban` CLI is installed. The repository ships with a `Makefile` that compiles the aggregator in the root crate and the custom oracle found under `custom-oracle/`, producing optimized WASM files for each contract.
 
 ```bash
 make build
 ```
 
-Output:
+The optimized binaries will be located in `target/wasm32-unknown-unknown/optimized/`.
 
-- `target/wasm32-unknown-unknown/optimized/custom_oracle.wasm`
-- `target/wasm32-unknown-unknown/optimized/oracle_aggregator.wasm`
+## Deploying the contracts
 
----
+1. **Deploy the custom oracle**
 
-## 🚀 1. Deploy `custom_oracle`
+   1. Upload `custom_oracle.wasm` to the network.
+   2. Invoke `init` supplying the administrator address, a list of assets, the decimals used for prices and the resolution in seconds.
+   3. Use `set_price` to publish prices for all configured assets at a specific timestamp.
 
-Output:
+2. **Deploy the oracle aggregator**
+   1. Upload `oracle_aggregator.wasm`.
+   2. Call `init` with an admin address, the base asset, the number of decimals and the maximum age (in seconds) for price history.
+   3. Register the custom oracle address using `add_oracle`.
+   4. Register assets with `add_asset` or `add_base_asset` as needed.
 
-```
-Installed WASM hash: b81e...
-```
-
-### 1.1 Create contract (call `__constructor`)
-
-```bash
-stellar contract deploy \
-  --wasm target/wasm32-unknown-unknown/optimized/custom_oracle.wasm \
-  --network testnet \
-  --rpc-url https://soroban-testnet.stellar.org \
-  --network-passphrase "Test SDF Network ; September 2015" \
-  --source-account oracle-deployer \
-  -- \
-    admin=GASVLW5YQFHEZJPNV2OQQ3P6CBD5Z5IW3XDAPEGSS6BMQZ35WZHCSKNB \
-    assets='[{"Symbol":"USDC"},{"Symbol":"BLND"}]' \
-    decimals=6 \
-    resolution=60
-```
-
-### 1.2 Contract info
-
-```bash
-stellar contract info interface \
-  --id CD4C4P7HSJKDJ5G6VCLIXWCQJNA257NRXBT44CKQCRRIDENTFJ5UMHYO \
-  --network testnet \
-  --rpc-url https://soroban-testnet.stellar.org \
-  --network-passphrase "Test SDF Network ; September 2015"
-```
-
-### 1.3 Consultar la resolución
-
-```bash
-stellar contract invoke \
-  --id CDLR6TLYLADGOZFDMWEWOY5NLKIDQ2Y3K62OXX47ZWQARLVRYLFS2CNW \
-  --network testnet \
-  --rpc-url https://soroban-testnet.stellar.org \
-  --network-passphrase "Test SDF Network ; September 2015" \
-  --source-account oracle-deployer \
-  -- resolution
-```
-
-### 1.4 Publicar precios con `set_price`
-
-```bash
-stellar contract invoke \
-  --id CDLR6TLYLADGOZFDMWEWOY5NLKIDQ2Y3K62OXX47ZWQARLVRYLFS2CNW \
-  --network testnet \
-  --rpc-url https://soroban-testnet.stellar.org \
-  --network-passphrase "Test SDF Network ; September 2015" \
-  --source-account oracle-deployer \
-  -- set_price prices='[1000000,2000000]' timestamp=1728000000
-```
+After deployment the aggregator can query the custom oracle using the `PriceFeed` interface.
