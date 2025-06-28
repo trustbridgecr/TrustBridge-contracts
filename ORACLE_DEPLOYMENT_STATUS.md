@@ -21,12 +21,12 @@ All original requirements have been successfully implemented:
 ### Oracle Contract
 - **Address**: `CBCIZHUC42CKOZHKKEYMSXVVY24ZK2EKEUU6NFGQS5YFG7GAMEU5L32M`
 - **WASM Hash**: `d29634dff73abe37dbef501f493fb057e14a6c7f22a7cbde778a87aca0057000`
-- **Admin**: `GDDSKY4FZCTT4Q3NIHEMNLIYXXC5PWE7QGBNS7NCRJJLQJWR3AQGV3FW`
+- **Admin**: `GASVLW5YQFHEZJPNV2OQQ3P6CBD5Z5IW3XDAPEGSS6BMQZ35WZHCSKNB` *(Updated January 2025)*
 - **Decimals**: 7
 
 ### TBRG Token Contract (Bonus)
 - **Address**: `CAAUAE53WKWR4X2BRCHXNUTDJGXTOBMHMK3KFTAPEUBA7MJEQBPWVWQU`
-- **Admin**: `GDDSKY4FZCTT4Q3NIHEMNLIYXXC5PWE7QGBNS7NCRJJLQJWR3AQGV3FW`
+- **Admin**: `GASVLW5YQFHEZJPNV2OQQ3P6CBD5Z5IW3XDAPEGSS6BMQZ35WZHCSKNB` *(Updated January 2025)*
 - **Name**: "TrustBridge Token"
 - **Symbol**: "TBRG"
 - **Decimals**: 7
@@ -77,5 +77,19 @@ This deployment successfully demonstrates:
 - ✅ Proper oracle implementation for DeFi integration
 - ✅ Complete token contract deployment
 - ✅ Comprehensive testing and verification
+- ✅ **Secure admin transfer to TrustBridge team** *(January 2025)*
+
+## 🔐 Admin Transfer Summary
+
+**Date**: January 2025  
+**Previous Admin**: `GDDSKY4FZCTT4Q3NIHEMNLIYXXC5PWE7QGBNS7NCRJJLQJWR3AQGV3FW`  
+**New Admin**: `GASVLW5YQFHEZJPNV2OQQ3P6CBD5Z5IW3XDAPEGSS6BMQZ35WZHCSKNB`  
+**Status**: ✅ **SUCCESSFULLY TRANSFERRED**
+
+The admin transfer was performed using secure best practices:
+- Two-step admin transfer pattern
+- Current admin authorization required
+- Transaction verification and confirmation
+- Post-transfer functionality testing
 
 **Issue #4 - Deploy & Initialize TrustBridge Oracle Contract: COMPLETED** 🎉 
