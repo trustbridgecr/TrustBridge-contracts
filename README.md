@@ -2,6 +2,17 @@
 
 This repository contains the smart contracts for an implementation of the TrustBridge Protocol. TrustBridge is a universal liquidity protocol primitive that enables the permissionless creation of lending pools.
 
+## 🚀 Oracle Deployment Status
+
+✅ **TrustBridge Oracle is LIVE on Stellar Testnet!**
+
+- **Oracle Contract**: `CBCIZHUC42CKOZHKKEYMSXVVY24ZK2EKEUU6NFGQS5YFG7GAMEU5L32M`
+- **TBRG Token Contract**: `CAAUAE53WKWR4X2BRCHXNUTDJGXTOBMHMK3KFTAPEUBA7MJEQBPWVWQU`
+- **Supported Assets**: USDC, XLM, TBRG
+- **Status**: Fully operational with live price feeds
+
+📋 **[View Complete Deployment Details](./ORACLE_DEPLOYMENT_STATUS.md)**
+
 ## Documentation
 
 To learn more about the TrustBridge Protocol, visit the docs:
