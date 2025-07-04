@@ -1,3 +1,5 @@
+![Banner](https://github.com/user-attachments/assets/1fc979f4-8e43-4b6e-9cd5-40c8c04caaa2)
+
 # TrustBridge Protocol
 
 This repository contains the smart contracts for an implementation of the TrustBridge Protocol. TrustBridge is a universal liquidity protocol primitive that enables the permissionless creation of lending pools.
