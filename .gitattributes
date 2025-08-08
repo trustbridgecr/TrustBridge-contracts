@@ -1,0 +1,110 @@
+# =============================================================================
+# TrustBridge Smart Contracts - Git Attributes
+# =============================================================================
+
+# ============= Text Files =============
+# Ensure consistent line endings across platforms
+* text=auto eol=lf
+
+# ============= Rust Files =============
+*.rs text diff=rust
+*.toml text
+Cargo.lock text
+
+# ============= Shell Scripts =============
+*.sh text eol=lf
+*.bash text eol=lf
+tools/deploy-all.sh text eol=lf
+
+# ============= Documentation =============
+*.md text
+*.txt text
+*.rst text
+
+# ============= Configuration Files =============
+*.json text
+*.yaml text
+*.yml text
+*.xml text
+*.ini text
+*.conf text
+*.config text
+
+# Environment files
+.env* text
+*.env text
+
+# ============= Web Files =============
+*.html text diff=html
+*.css text diff=css
+*.js text diff=javascript
+*.ts text
+
+# ============= Binary Files =============
+# Ensure binary files are stored as binary
+*.wasm binary
+*.bin binary
+*.exe binary
+*.dll binary
+*.so binary
+*.dylib binary
+
+# ============= Archive Files =============
+*.zip binary
+*.tar binary
+*.gz binary
+*.7z binary
+*.rar binary
+
+# ============= Image Files =============
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg text
+
+# ============= Document Files =============
+*.pdf binary
+*.doc binary
+*.docx binary
+
+# ============= Soroban/Stellar Specific =============
+# Contract metadata
+*.meta.json text
+
+# Deployment files
+deployment*.json text
+deployment*.env text
+
+# ============= Git LFS (if used) =============
+# Large binary files (uncomment if using Git LFS)
+# *.wasm filter=lfs diff=lfs merge=lfs -text
+# *.pdf filter=lfs diff=lfs merge=lfs -text
+
+# ============= Language-Specific Attributes =============
+# Rust
+Cargo.toml diff=toml
+rust-toolchain.toml diff=toml
+
+# Markdown
+*.md diff=markdown
+
+# Shell
+*.sh diff=bash
+
+# ============= Diff and Merge Settings =============
+# Better diff for specific file types
+*.toml diff=toml
+*.json diff=json
+*.md diff=markdown
+
+# ============= Export Ignore =============
+# Files to exclude from git archive exports
+.gitignore export-ignore
+.gitattributes export-ignore
+.github/ export-ignore
+docs/ export-ignore
+testing/ export-ignore
+*.md export-ignore
+PROJECT_STRUCTURE.md export-ignore
