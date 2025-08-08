@@ -1,75 +1,75 @@
 # TrustBridge Deployment Guide
 
-Esta guía te ayudará a deployar todos los contratos de TrustBridge usando el script automatizado `tools/deploy-all.sh`.
+This guide will help you deploy all TrustBridge contracts using the automated script `tools/deploy-all.sh`.
 
-## Prerequisitos
+## Prerequisites
 
-### 1. Herramientas Necesarias
+### 1. Required Tools
 
 - **Rust** (versión 1.89.0 o superior)
 - **Stellar CLI** (versión compatible)
 - **wasm32-unknown-unknown target**
 
 ```bash
-# Instalar target WASM
+# Install WASM target
 rustup target add wasm32-unknown-unknown
 
-# Verificar instalación
+# Verify installation
 rustc --version
 stellar --version
 ```
 
-### 2. Configuración de Variables de Entorno
+### 2. Environment Variables Configuration
 
 ```bash
-# Copiar archivo de ejemplo
+# Copy example file
 cp .env.example .env
 
-# Editar con tus valores
-# Mínimo requerido: ADMIN_ADDRESS
+# Edit with your values
+# Minimum required: ADMIN_ADDRESS
 nano .env
 ```
 
-### 3. Configuración de Cuentas
+### 3. Account Configuration
 
-Antes de deployar, necesitas configurar una cuenta de Stellar:
+Before deploying, you need to configure a Stellar account:
 
 ```bash
-# Generar nueva identidad
+# Generate new identity
 stellar keys generate alice
 
-# O usar una existente
+# Or use an existing one
 stellar keys address alice
 
-# Fondear cuenta en testnet
+# Fund account on testnet
 stellar keys fund alice --network testnet
 
-# Verificar fondos
-stellar keys address alice  # Copia la dirección para usar como ADMIN_ADDRESS
+# Verify funds
+stellar keys address alice  # Copy the address to use as ADMIN_ADDRESS
 ```
 
-## Uso del Script de Deployment
+## Using the Deployment Script
 
-### Comando Básico
+### Basic Command
 
 ```bash
-ADMIN_ADDRESS="TU_DIRECCION_AQUI" ./tools/deploy-all.sh
+ADMIN_ADDRESS="YOUR_ADDRESS_HERE" ./tools/deploy-all.sh
 ```
 
-### Ejemplo Completo
+### Complete Example
 
 ```bash
-# Hacer executable el script
+# Make script executable
 chmod +x tools/deploy-all.sh
 
-# Deploy con dirección específica
+# Deploy with specific address
 ADMIN_ADDRESS="GBZXN7PIRZGNMHGA7MUUUF4GWJQ5UW5FWVD2URXVPE4YKBXXKBJQT3J5" ./tools/deploy-all.sh
 ```
 
-### Variables de Entorno Opcionales
+### Optional Environment Variables
 
 ```bash
-# Personalizar configuración
+# Customize configuration
 NETWORK="testnet" \
 SOURCE_ACCOUNT="alice" \
 ADMIN_ADDRESS="GBZXN7PIRZGNMHGA7MUUUF4GWJQ5UW5FWVD2URXVPE4YKBXXKBJQT3J5" \
@@ -77,44 +77,44 @@ ORACLE_ADMIN="GBZXN7PIRZGNMHGA7MUUUF4GWJQ5UW5FWVD2URXVPE4YKBXXKBJQT3J5" \
 ./tools/deploy-all.sh
 ```
 
-## Proceso de Deployment
+## Deployment Process
 
-El script `deploy-all.sh` ejecuta automáticamente:
+The `deploy-all.sh` script automatically executes:
 
-### 1. Compilación en Orden de Dependencias
+### 1. Compilation in Dependency Order
 
 ```bash
 🔨 Building contracts in dependency order...
-🔨 Building oracle...        # Sin dependencias
-🔨 Building pool-factory...  # Sin dependencias  
-🔨 Building backstop...      # Depende de pool-factory WASM
-🔨 Building pool...          # Depende de backstop WASM
+🔨 Building oracle...        # No dependencies
+🔨 Building pool-factory...  # No dependencies  
+🔨 Building backstop...      # Depends on pool-factory WASM
+🔨 Building pool...          # Depends on backstop WASM
 ```
 
-### 2. Deployment Secuencial
+### 2. Sequential Deployment
 
 1. **Oracle Contract**
-   - Deploy del contrato Oracle
-   - Inicialización con admin address
+   - Deploy the Oracle contract
+   - Initialize with admin address
    
 2. **Pool Factory Contract**
-   - Deploy del contrato Pool Factory
+   - Deploy the Pool Factory contract
    
 3. **Backstop Contract**
-   - Deploy del contrato Backstop
+   - Deploy the Backstop contract
    
 4. **Pool Creation**
-   - Uso del Pool Factory para crear un pool
-   - Configuración con Oracle y Backstop
+   - Use the Pool Factory to create a pool
+   - Configure with Oracle and Backstop
 
-### 3. Guardado de Información
+### 3. Information Storage
 
-Se crean dos archivos automáticamente:
+Two files are automatically created:
 
-- **`deployment.json`** - Información detallada
-- **`deployment.env`** - Variables de entorno
+- **`deployment.json`** - Detailed information
+- **`deployment.env`** - Environment variables
 
-## Archivos Generados
+## Generated Files
 
 ### deployment.json
 ```json
@@ -145,20 +145,20 @@ export TRUSTBRIDGE_NETWORK="testnet"
 export TRUSTBRIDGE_ADMIN="GBZXN7PIRZGNMHGA7MUUUF4GWJQ5UW5FWVD2URXVPE4YKBXXKBJQT3J5"
 ```
 
-## Uso de Contratos Deployados
+## Using Deployed Contracts
 
-### Cargar Variables de Entorno
+### Load Environment Variables
 
 ```bash
-# Cargar direcciones de contratos
+# Load contract addresses
 source deployment.env
 
-# Verificar variables
+# Verify variables
 echo $TRUSTBRIDGE_ORACLE_ID
 echo $TRUSTBRIDGE_POOL_ID
 ```
 
-### Interactuar con Contratos
+### Interact with Contracts
 
 #### Oracle Contract
 ```bash
@@ -199,103 +199,103 @@ stellar contract invoke \
 
 ## Troubleshooting
 
-### Errores Comunes
+### Common Errors
 
 #### "XDR value invalid"
 ```bash
-# Problema: Incompatibilidad de versiones
-# Solución: Verificar compatibilidad entre CLI y SDK
+# Problem: Version incompatibility
+# Solution: Verify compatibility between CLI and SDK
 
-stellar --version  # Debe ser compatible con soroban-sdk utilizado
+stellar --version  # Must be compatible with the soroban-sdk used
 ```
 
 #### "Account not found"
 ```bash
-# Problema: Cuenta sin fondos
-# Solución: Fondear cuenta
+# Problem: Account without funds
+# Solution: Fund account
 
 stellar keys fund alice --network testnet
 ```
 
 #### "Contract not found"
 ```bash
-# Problema: Dependencias no compiladas correctamente
-# Solución: Limpiar y recompilar
+# Problem: Dependencies not compiled correctly
+# Solution: Clean and recompile
 
 rm -rf target */target
 ./tools/deploy-all.sh
 ```
 
-### Logs y Debug
+### Logs and Debug
 
-Para obtener más información de debug:
+To get more debug information:
 
 ```bash
-# Ejecutar con logs verbosos
+# Run with verbose logs
 RUST_LOG=debug ADMIN_ADDRESS="..." ./tools/deploy-all.sh
 
-# Verificar estado de la red
+# Check network status
 stellar network ls
 
-# Verificar cuenta específica  
+# Check specific account
 stellar keys address alice
 ```
 
-## Redes Disponibles
+## Available Networks
 
-### Testnet (Recomendada para pruebas)
+### Testnet (Recommended for testing)
 ```bash
 NETWORK="testnet" ./tools/deploy-all.sh
 ```
 
-### Futurenet (Para features experimentales)
+### Futurenet (For experimental features)
 ```bash  
 NETWORK="futurenet" ./tools/deploy-all.sh
 ```
 
-### Mainnet (Solo para producción)
+### Mainnet (Production only)
 ```bash
 NETWORK="mainnet" ./tools/deploy-all.sh
 ```
 
 ## Post-Deployment
 
-### 1. Verificar Contratos
+### 1. Verify Contracts
 
-Visita Stellar Explorer para verificar los contratos:
+Visit Stellar Explorer to verify the contracts:
 
 - Oracle: `https://stellar.expert/explorer/testnet/contract/{ORACLE_ID}`
 - Pool Factory: `https://stellar.expert/explorer/testnet/contract/{POOL_FACTORY_ID}`
 - Backstop: `https://stellar.expert/explorer/testnet/contract/{BACKSTOP_ID}`
 - Pool: `https://stellar.expert/explorer/testnet/contract/{POOL_ID}`
 
-### 2. Configuración Inicial
+### 2. Initial Configuration
 
-1. **Configurar precios en Oracle**
-2. **Establecer reservas en Pool** 
-3. **Probar funcionalidad básica**
+1. **Configure prices in Oracle**
+2. **Set reserves in Pool** 
+3. **Test basic functionality**
 
-### 3. Siguiente Pasos
+### 3. Next Steps
 
 - Configure reserves in the pool
 - Set initial prices in the oracle
 - Test the deployment
 
-## Seguridad
+## Security
 
-⚠️ **Importantes consideraciones de seguridad:**
+⚠️ **Important security considerations:**
 
-- **Nunca compartas tu private key**
-- **Usa addresses dedicadas para admin**
-- **Verifica todas las transacciones antes de firmar**
-- **Guarda de forma segura deployment.json y deployment.env**
-- **Usa testnet antes de mainnet**
+- **Never share your private key**
+- **Use dedicated addresses for admin**
+- **Verify all transactions before signing**
+- **Securely store deployment.json and deployment.env**
+- **Use testnet before mainnet**
 
-## Soporte
+## Support
 
-Si encuentras problemas:
+If you encounter problems:
 
-1. Revisa la sección [Troubleshooting](#troubleshooting)
-2. Verifica la configuración de prerequisitos
-3. Consulta los logs de deployment
-4. Crea un issue en el repositorio
+1. Review the [Troubleshooting](#troubleshooting) section
+2. Verify the prerequisites configuration
+3. Check the deployment logs
+4. Create an issue in the repository
