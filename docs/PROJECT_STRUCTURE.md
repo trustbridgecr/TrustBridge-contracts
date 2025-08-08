@@ -1,22 +1,22 @@
 # 🏗️ TrustBridge Project Structure
 
-Esta es la nueva estructura organizacional del proyecto TrustBridge, completamente reorganizada y optimizada.
+This is the new organizational structure of the TrustBridge project, completely reorganized and optimized.
 
-## 📁 Estructura del Directorio
+## 📁 Directory Structure
 
 ```
 TrustBridge-contracts/
-├── 📦 contracts/                    # 🎯 Todos los contratos inteligentes
-│   ├── 🔮 oracle/                  # Oracle de precios (SEP-40)
+├── 📦 contracts/                    # 🎯 All smart contracts
+│   ├── 🔮 oracle/                  # Price oracle (SEP-40)
 │   │   ├── Cargo.toml
 │   │   ├── src/
-│   │   │   ├── lib.rs             # Contrato principal
-│   │   │   ├── storage.rs         # Gestión de almacenamiento
-│   │   │   ├── error.rs           # Manejo de errores
-│   │   │   └── events.rs          # Eventos del contrato
-│   │   └── target/                # Binarios compilados
+│   │   │   ├── lib.rs             # Main contract
+│   │   │   ├── storage.rs         # Storage management
+│   │   │   ├── error.rs           # Error handling
+│   │   │   └── events.rs          # Contract events
+│   │   └── target/                # Compiled binaries
 │   │
-│   ├── 🏭 pool-factory/           # Fábrica de pools de préstamo
+│   ├── 🏭 pool-factory/           # Lending pool factory
 │   │   ├── Cargo.toml
 │   │   ├── src/
 │   │   │   ├── lib.rs
@@ -25,7 +25,7 @@ TrustBridge-contracts/
 │   │   │   └── errors.rs
 │   │   └── target/
 │   │
-│   ├── 🛡️ backstop/                # Mecanismo de respaldo
+│   ├── 🛡️ backstop/                # Backstop mechanism
 │   │   ├── Cargo.toml
 │   │   ├── src/
 │   │   │   ├── lib.rs
@@ -34,7 +34,7 @@ TrustBridge-contracts/
 │   │   │   └── emissions/
 │   │   └── target/
 │   │
-│   ├── 🏊 pool/                    # Pool principal de préstamos
+│   ├── 🏊 pool/                    # Main lending pool
 │   │   ├── Cargo.toml
 │   │   ├── src/
 │   │   │   ├── lib.rs
@@ -43,7 +43,7 @@ TrustBridge-contracts/
 │   │   │   └── dependencies/
 │   │   └── target/
 │   │
-│   ├── 🪙 tbrg-token/              # Token de gobernanza TrustBridge
+│   ├── 🪙 tbrg-token/              # TrustBridge governance token
 │   │   ├── Cargo.toml
 │   │   ├── src/
 │   │   │   ├── lib.rs
@@ -51,114 +51,114 @@ TrustBridge-contracts/
 │   │   │   └── metadata.rs
 │   │   └── target/
 │   │
-│   ├── 🔧 emitter/                 # Contratos de emisión
+│   ├── 🔧 emitter/                 # Emission contracts
 │   │   └── README.md
 │   │
-│   └── 🎭 mocks/                   # Contratos mock para testing
+│   └── 🎭 mocks/                   # Mock contracts for testing
 │       ├── mock-pool-factory/
 │       ├── mock-pool/
 │       └── moderc3156/
 │
-├── 🛠️ tools/                       # 🚀 Herramientas y scripts
-│   ├── 📜 deploy-all.sh           # ⭐ Script principal de deployment
-│   └── 📁 scripts/                # Scripts adicionales
+├── 🛠️ tools/                       # 🚀 Tools and scripts
+│   ├── 📜 deploy-all.sh           # ⭐ Main deployment script
+│   └── 📁 scripts/                # Additional scripts
 │       ├── deploy_oracle.sh
 │       ├── set_price_batch.sh
 │       ├── transfer_admin.sh
 │       └── verify_oracle.sh
 │
-├── 🧪 testing/                     # 🔬 Suites de pruebas
-│   └── test-suites/               # Pruebas integrales
+├── 🧪 testing/                     # 🔬 Test suites
+│   └── test-suites/               # Comprehensive tests
 │       ├── Cargo.toml
 │       ├── src/
 │       ├── tests/
 │       └── fuzz/
 │
-├── 📚 docs/                        # 📖 Documentación
-│   ├── README.md                  # Índice de documentación
-│   ├── DEPLOYMENT.md              # ⭐ Guía completa de deployment
+├── 📚 docs/                        # 📖 Documentation
+│   ├── README.md                  # Documentation index
+│   ├── DEPLOYMENT.md              # ⭐ Complete deployment guide
 │   ├── CONTRIBUTORS_GUIDELINE.md
 │   └── GIT_GUIDELINE.md
 │
-├── 🔒 audits/                      # 🛡️ Reportes de auditoría
+├── 🔒 audits/                      # 🛡️ Security audit reports
 │   ├── BlendCertoraReport.pdf
 │   └── blend_capital_final.pdf
 │
-├── ⚙️ Cargo.toml                   # Configuración del workspace
-├── 🦀 rust-toolchain.toml         # Especificación de toolchain
-├── 📃 LICENSE                     # Licencia AGPL-3.0
-└── 📖 README.md                   # ⭐ README principal del proyecto
+├── ⚙️ Cargo.toml                   # Workspace configuration
+├── 🦀 rust-toolchain.toml         # Toolchain specification
+├── 📃 LICENSE                     # AGPL-3.0 license
+└── 📖 README.md                   # ⭐ Main project README
 ```
 
-## 🎯 Contratos Principales
+## 🎯 Main Contracts
 
 ### Core Contracts
 
-| Contrato | Ubicación | Descripción | Estado |
+| Contract | Location | Description | Status |
 |----------|-----------|-------------|--------|
-| **Oracle** | `contracts/oracle/` | Oracle de precios SEP-40 | ✅ Funcional |
-| **Pool Factory** | `contracts/pool-factory/` | Fábrica de pools de préstamo | ✅ Funcional |
-| **Backstop** | `contracts/backstop/` | Mecanismo de respaldo de seguridad | ✅ Funcional |
-| **Pool** | `contracts/pool/` | Pool principal de préstamos/depósitos | ✅ Funcional |
-| **TBRG Token** | `contracts/tbrg-token/` | Token de gobernanza TrustBridge | ✅ Funcional |
+| **Oracle** | `contracts/oracle/` | SEP-40 price oracle | ✅ Functional |
+| **Pool Factory** | `contracts/pool-factory/` | Lending pool factory | ✅ Functional |
+| **Backstop** | `contracts/backstop/` | Security backstop mechanism | ✅ Functional |
+| **Pool** | `contracts/pool/` | Main lending/deposit pool | ✅ Functional |
+| **TBRG Token** | `contracts/tbrg-token/` | TrustBridge governance token | ✅ Functional |
 
 ### Mock Contracts (Testing)
 
-| Mock | Ubicación | Propósito |
+| Mock | Location | Purpose |
 |------|-----------|-----------|
-| **Mock Pool Factory** | `contracts/mocks/mock-pool-factory/` | Testing de pool factory |
-| **Mock Pool** | `contracts/mocks/mock-pool/` | Testing de pool |
+| **Mock Pool Factory** | `contracts/mocks/mock-pool-factory/` | Pool factory testing |
+| **Mock Pool** | `contracts/mocks/mock-pool/` | Pool testing |
 | **ModERC3156** | `contracts/mocks/moderc3156/` | Testing de flash loans |
 
 ## 🚀 Deployment
 
-### Script Principal
+### Main Script
 
 ```bash
-# El script principal está en tools/
+# The main script is in tools/
 chmod +x tools/deploy-all.sh
 
-# Ejecutar deployment completo
-ADMIN_ADDRESS="TU_DIRECCION" ./tools/deploy-all.sh
+# Run complete deployment
+ADMIN_ADDRESS="YOUR_ADDRESS" ./tools/deploy-all.sh
 ```
 
-### Orden de Deployment
+### Deployment Order
 
-1. **Oracle** (`contracts/oracle/`) - Sin dependencias
-2. **Pool Factory** (`contracts/pool-factory/`) - Sin dependencias  
-3. **Backstop** (`contracts/backstop/`) - Depende de Pool Factory WASM
-4. **Pool** (`contracts/pool/`) - Depende de Backstop WASM
+1. **Oracle** (`contracts/oracle/`) - No dependencies
+2. **Pool Factory** (`contracts/pool-factory/`) - No dependencies  
+3. **Backstop** (`contracts/backstop/`) - Depends on Pool Factory WASM
+4. **Pool** (`contracts/pool/`) - Depends on Backstop WASM
 
-## 🔧 Desarrollo
+## 🔧 Development
 
-### Build Individual
+### Individual Build
 
 ```bash
-# Construir Oracle
+# Build Oracle
 cd contracts/oracle && cargo build --target wasm32-unknown-unknown --release
 
-# Construir Pool Factory
+# Build Pool Factory
 cd contracts/pool-factory && cargo build --target wasm32-unknown-unknown --release
 ```
 
-### Build Completo
+### Complete Build
 
 ```bash
-# El script maneja todas las dependencias automáticamente
+# The script handles all dependencies automatically
 ./tools/deploy-all.sh
 ```
 
 ### Testing
 
 ```bash
-# Tests individuales
+# Individual tests
 cd contracts/oracle && cargo test
 
-# Suite completa de tests
+# Complete test suite
 cd testing/test-suites && cargo test
 ```
 
-## 📋 Configuración del Workspace
+## 📋 Workspace Configuration
 
 ```toml
 # Cargo.toml
@@ -169,61 +169,61 @@ members = [
   "contracts/pool-factory"
 ]
 exclude = [
-  "contracts/backstop",      # Excluidos por conflictos de dependencias
-  "contracts/pool",          # Se construyen individualmente
+  "contracts/backstop",      # Excluded due to dependency conflicts
+  "contracts/pool",          # Built individually
   "contracts/mocks/*",
   "testing/test-suites"
 ]
 ```
 
-## 🎨 Beneficios de la Nueva Estructura
+## 🎨 Benefits of the New Structure
 
-### ✅ Organización Clara
-- **Contratos**: Todo en `contracts/`
-- **Herramientas**: Todo en `tools/`
-- **Tests**: Todo en `testing/`
-- **Docs**: Todo en `docs/`
+### ✅ Clear Organization
+- **Contracts**: Everything in `contracts/`
+- **Tools**: Everything in `tools/`
+- **Tests**: Everything in `testing/`
+- **Docs**: Everything in `docs/`
 
-### ✅ Deployment Simplificado
-- **Un solo script**: `tools/deploy-all.sh`
-- **Documentación completa**: `docs/DEPLOYMENT.md`
-- **Dependencias resueltas**: Orden correcto automático
+### ✅ Simplified Deployment
+- **Single script**: `tools/deploy-all.sh`
+- **Complete documentation**: `docs/DEPLOYMENT.md`
+- **Dependencies resolved**: Automatic correct order
 
-### ✅ Desarrollo Mejorado
-- **Separación clara** de responsabilidades
-- **Workspace optimizado** para builds rápidos
-- **Documentación actualizada** y centralizada
+### ✅ Improved Development
+- **Clear separation** of responsibilities
+- **Optimized workspace** for fast builds
+- **Updated and centralized** documentation
 
-### ✅ Mantenimiento Fácil
-- **Estructura lógica** fácil de navegar
-- **Scripts organizados** en `tools/`
-- **Tests centralizados** en `testing/`
+### ✅ Easy Maintenance
+- **Logical structure** easy to navigate
+- **Organized scripts** in `tools/`
+- **Centralized tests** in `testing/`
 
-## 🔄 Migración Completada
+## 🔄 Migration Completed
 
-### ✅ Cambios Realizados
+### ✅ Changes Made
 
-1. **📁 Reorganización completa** de directorios
-2. **🔧 Script de deployment** actualizado (`tools/deploy-all.sh`)  
-3. **📚 Documentación** actualizada (`docs/DEPLOYMENT.md`)
-4. **⚙️ Configuración workspace** optimizada
-5. **🔗 Referencias de dependencias** corregidas
-6. **📖 README principal** renovado
+1. **📁 Complete reorganization** of directories
+2. **🔧 Deployment script** updated (`tools/deploy-all.sh`)  
+3. **📚 Documentation** updated (`docs/DEPLOYMENT.md`)
+4. **⚙️ Workspace configuration** optimized
+5. **🔗 Dependency references** corrected
+6. **📖 Main README** renewed
 
-### ✅ Funcionalidad Preservada
+### ✅ Functionality Preserved
 
-- **Todos los contratos** compilan correctamente
-- **Script de deployment** funciona con nueva estructura
-- **Dependencias resueltas** correctamente
-- **Documentación** actualizada y completa
+- **All contracts** compile correctly
+- **Deployment script** works with new structure
+- **Dependencies resolved** correctly
+- **Documentation** updated and complete
 
 ---
 
-## 🎯 Próximos Pasos
+## 🎯 Next Steps
 
-1. **Probar deployment** en testnet
-2. **Verificar funcionalidad** de todos los contratos
-3. **Actualizar CI/CD** si es necesario
-4. **Documentar APIs** específicas de contratos
+1. **Test deployment** on testnet
+2. **Verify functionality** of all contracts
+3. **Update CI/CD** if necessary
+4. **Document contract-specific APIs**
 
-**¡La reorganización está completa y el proyecto está listo para usar! 🎉**
+**The reorganization is complete and the project is ready to use! 🎉**
