@@ -594,4 +594,21 @@ impl Pool for PoolContract {
 
         pool::bad_debt(&e, &user);
     }
+
+    /// Returns the amount a user has borrowed for a specific asset.
+    ///
+    /// ### Arguments
+    /// * `user` - The address of the user
+    /// * `asset` - The address of the asset to query
+    ///
+    /// Returns the liability amount in share units (i128), or 0 if the user has no borrow for that asset.
+    fn get_user_debt_for_asset(e: Env, user: Address, asset: Address) -> i128 {
+        let reserve_list = storage::get_res_list(&e);
+        let positions = storage::get_user_positions(&e, &user);
+
+        match reserve_list.iter().position(|a| a == &asset) {
+            Some(index) => positions.liabilities.get(index as u32).unwrap_or(0),
+            None => 0,
+        }
+    }
 }
